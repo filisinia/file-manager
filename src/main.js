@@ -1,9 +1,9 @@
 import process, { stdin } from "node:process";
+import { getUsername } from "./utils/getUsername.js";
+import { goUp } from "./modules/goUp.js";
 
 const main = async () => {
-  const usernameArg = process.argv.find((arg) => arg.startsWith("--username="));
-  const username = usernameArg ? usernameArg.split("=")[1] : "Anonymous";
-
+  const username = getUsername();
   const welcomeMessage = `Welcome to the File Manager, ${username}!`;
   const finishMessage = `Thank you for using File Manager, ${username}, goodbye!`;
   console.log(welcomeMessage);
@@ -16,6 +16,7 @@ const main = async () => {
     switch (userText) {
       case "up":
         console.log("UP COMMAND");
+        goUp();
         break;
       case "ls":
         console.log("LS COMMAND");
