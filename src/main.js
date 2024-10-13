@@ -1,6 +1,6 @@
-import process from "node:process";
+import process, { stdin } from "node:process";
 
-const main = () => {
+const main = async () => {
   const usernameArg = process.argv.find((arg) => arg.startsWith("--username="));
   const username = usernameArg ? usernameArg.split("=")[1] : "Anonymous";
 
@@ -8,9 +8,29 @@ const main = () => {
   const finishMessage = `Thank you for using File Manager, ${username}, goodbye!`;
   console.log(welcomeMessage);
 
-  process.on("exit", () => {
+  stdin.setEncoding("utf-8");
+
+  stdin.on("data", (data) => {
+    const userText = data.trim().toLowerCase();
+
+    switch (userText) {
+      case "up":
+        console.log("UP COMMAND");
+        break;
+      case "ls":
+        console.log("LS COMMAND");
+        break;
+      default:
+        console.log("Invalid input");
+    }
+
+    console.log(`You are currently in ${process.cwd()}`);
+  });
+
+  process.on("SIGINT", () => {
     console.log(finishMessage);
+    process.exit();
   });
 };
 
-main();
+await main();
