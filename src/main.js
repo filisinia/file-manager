@@ -5,6 +5,7 @@ import { goTo } from "./modules/goTo.js";
 import { getContent } from "./modules/getContent.js";
 import { getFileContent } from "./modules/getFileContent.js";
 import { createNewFile } from "./modules/createNewFile.js";
+import { renameFile } from "./modules/renameFile.js";
 
 const main = async () => {
   const username = getUsername();
@@ -36,6 +37,11 @@ const main = async () => {
     if (userText.startsWith("add")) {
       const newFilename = userText.slice(3).trim();
       await createNewFile(newFilename);
+    }
+
+    if (userText.startsWith("rn")) {
+      const userInput = userText.slice(3).trim().split(" ");
+      await renameFile(userInput[0], userInput[1]);
     }
 
     console.log(`You are currently in ${process.cwd()}`);
