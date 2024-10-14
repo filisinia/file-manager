@@ -1,13 +1,14 @@
 import process, { stdin } from "node:process";
 import { getUsername } from "./utils/getUsername.js";
-import { goUp } from "./modules/goUp.js";
-import { goTo } from "./modules/goTo.js";
-import { getContent } from "./modules/getContent.js";
-import { getFileContent } from "./modules/getFileContent.js";
-import { createNewFile } from "./modules/createNewFile.js";
-import { renameFile } from "./modules/renameFile.js";
-import { copyFileFromTo } from "./modules/copyFileFromTo.js";
-import { moveFileFromTo } from "./modules/moveFileFromTo.js";
+import { goUp } from "./fs/goUp.js";
+import { goTo } from "./fs/goTo.js";
+import { getContent } from "./fs/getContent.js";
+import { getFileContent } from "./fs/getFileContent.js";
+import { createNewFile } from "./fs/createNewFile.js";
+import { renameFile } from "./fs/renameFile.js";
+import { copyFileFromTo } from "./fs/copyFileFromTo.js";
+import { moveFileFromTo } from "./fs/moveFileFromTo.js";
+import { deleteFile } from "./fs/deleteFile.js";
 
 const main = async () => {
   const username = getUsername();
@@ -42,18 +43,23 @@ const main = async () => {
     }
 
     if (userText.startsWith("rn")) {
-      const userInput = userText.slice(3).trim().split(" ");
+      const userInput = userText.slice(2).trim().split(" ");
       await renameFile(userInput[0], userInput[1]);
     }
 
     if (userText.startsWith("cp")) {
-      const userInput = userText.slice(3).trim().split(" ");
+      const userInput = userText.slice(2).trim().split(" ");
       await copyFileFromTo(userInput[0], userInput[1]);
     }
 
     if (userText.startsWith("mv")) {
-      const userInput = userText.slice(3).trim().split(" ");
+      const userInput = userText.slice(2).trim().split(" ");
       await moveFileFromTo(userInput[0], userInput[1]);
+    }
+
+    if (userText.startsWith("rm")) {
+      const path = userText.slice(2).trim();
+      await deleteFile(path);
     }
 
     console.log(`You are currently in ${process.cwd()}`);
