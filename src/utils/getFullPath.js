@@ -2,15 +2,9 @@ import { access } from "node:fs/promises";
 import { isAbsolute, join, resolve } from "node:path";
 
 export const getFullPath = async (path) => {
-  try {
-    const fullPath = isAbsolute(path)
-      ? resolve(path)
-      : join(process.cwd(), path);
+  const fullPath = isAbsolute(path) ? resolve(path) : join(process.cwd(), path);
 
-    await access(fullPath);
+  await access(fullPath);
 
-    return fullPath;
-  } catch {
-    throw new Error("Operation failed");
-  }
+  return fullPath;
 };

@@ -6,6 +6,6 @@ export const goTo = async (path) => {
     const fullPath = await getFullPath(path);
     chdir(fullPath);
   } catch {
-    console.log("Operation failed");
+    console.error("Operation failed");
   }
 };
