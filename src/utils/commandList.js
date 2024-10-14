@@ -9,6 +9,7 @@ import { moveFileFromTo } from "../fs/moveFileFromTo.js";
 import { deleteFile } from "../fs/deleteFile.js";
 import { getOSData } from "../os/getOSData.js";
 import { getHash } from "../hash/getHash.js";
+import { fileCompressor } from "../compress/fileCompressor.js";
 
 export const commandList = {
   up: goUp,
@@ -22,4 +23,6 @@ export const commandList = {
   rm: deleteFile,
   os: getOSData,
   hash: getHash,
+  compress: (...args) => fileCompressor("compress", ...args),
+  decompress: (...args) => fileCompressor("decompress", ...args),
 };
