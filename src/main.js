@@ -2,6 +2,7 @@ import process, { stdin } from "node:process";
 import { getUsername } from "./utils/getUsername.js";
 import { goUp } from "./modules/goUp.js";
 import { goTo } from "./modules/goTo.js";
+import { getContent } from "./modules/getContent.js";
 
 const main = async () => {
   const username = getUsername();
@@ -18,9 +19,11 @@ const main = async () => {
 
     if (userText.startsWith("cd")) {
       const path = userText.slice(2).trim();
-      const res = await goTo(path);
+      await goTo(path);
+    }
 
-      if (res !== "ok") console.log(res);
+    if (userText === "ls") {
+      await getContent();
     }
 
     console.log(`You are currently in ${process.cwd()}`);

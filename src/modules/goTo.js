@@ -16,9 +16,7 @@ export const goTo = async (path) => {
 
     await access(fullPath);
     chdir(fullPath);
-
-    return "ok";
   } catch {
-    return "Operation failed";
+    console.log("Operation failed");
   }
 };
