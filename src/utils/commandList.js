@@ -7,6 +7,7 @@ import { renameFile } from "../fs/renameFile.js";
 import { copyFileFromTo } from "../fs/copyFileFromTo.js";
 import { moveFileFromTo } from "../fs/moveFileFromTo.js";
 import { deleteFile } from "../fs/deleteFile.js";
+import {getOSData} from "../os/getOSData.js";
 
 export const commandList = {
   up: goUp,
@@ -18,4 +19,5 @@ export const commandList = {
   cp: copyFileFromTo,
   mv: moveFileFromTo,
   rm: deleteFile,
+  os: getOSData,
 };
