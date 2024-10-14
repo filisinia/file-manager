@@ -7,6 +7,7 @@ import { getFileContent } from "./modules/getFileContent.js";
 import { createNewFile } from "./modules/createNewFile.js";
 import { renameFile } from "./modules/renameFile.js";
 import { copyFileFromTo } from "./modules/copyFileFromTo.js";
+import { moveFileFromTo } from "./modules/moveFileFromTo.js";
 
 const main = async () => {
   const username = getUsername();
@@ -48,6 +49,11 @@ const main = async () => {
     if (userText.startsWith("cp")) {
       const userInput = userText.slice(3).trim().split(" ");
       await copyFileFromTo(userInput[0], userInput[1]);
+    }
+
+    if (userText.startsWith("mv")) {
+      const userInput = userText.slice(3).trim().split(" ");
+      await moveFileFromTo(userInput[0], userInput[1]);
     }
 
     console.log(`You are currently in ${process.cwd()}`);
