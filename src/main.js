@@ -3,6 +3,7 @@ import { getUsername } from "./utils/getUsername.js";
 import { goUp } from "./modules/goUp.js";
 import { goTo } from "./modules/goTo.js";
 import { getContent } from "./modules/getContent.js";
+import { getFileContent } from "./modules/getFileContent.js";
 
 const main = async () => {
   const username = getUsername();
@@ -24,6 +25,11 @@ const main = async () => {
 
     if (userText === "ls") {
       await getContent();
+    }
+
+    if (userText.startsWith("cat")) {
+      const path = userText.slice(3).trim();
+      await getFileContent(path);
     }
 
     console.log(`You are currently in ${process.cwd()}`);
